@@ -11,12 +11,24 @@ class BerlinClock {
 
     fun getMinutes(minutes: Int): Minutes {
         return when (minutes) {
-            1 -> Minutes(bottomColors = listOf(YELLOW, OFF, OFF, OFF))
-            2 -> Minutes(bottomColors = listOf(YELLOW, YELLOW, OFF, OFF))
-            3 -> Minutes(bottomColors = listOf(YELLOW, YELLOW, YELLOW, OFF))
-            4 -> Minutes(bottomColors = listOf(YELLOW, YELLOW, YELLOW, YELLOW))
+            in 1..4 -> Minutes(
+                bottomColors = getMinutesOnBottomLampColors(
+                    minutes,
+                    Minutes.defaultBottom()
+                )
+            )
             else -> defaultMinutes
         }
+    }
+
+    private fun getMinutesOnBottomLampColors(
+        minutes: Int,
+        lampColor: MutableList<LampColor>
+    ): List<LampColor> {
+        (1..minutes).forEach { i ->
+            lampColor[i - 1] = YELLOW
+        }
+        return lampColor
     }
 
     private val defaultMinutes get() = Minutes()
