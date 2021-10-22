@@ -31,4 +31,12 @@ class BerlinClockTest {
         val expectedResult = YELLOW
         assertThat(expectedResult).isEqualTo(result)
     }
+
+    @Test
+    fun test_random_even_seconds_should_return_yellow() {
+        val result = berlinClock.getSeconds(36)
+
+        val expectedResult = YELLOW
+        assertThat(expectedResult).isEqualTo(result)
+    }
 }
