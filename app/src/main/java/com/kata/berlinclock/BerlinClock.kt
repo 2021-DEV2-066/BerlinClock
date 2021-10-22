@@ -71,6 +71,7 @@ class BerlinClock {
         return when (hours) {
             1 -> Hours(bottomColors = listOf(RED, OFF, OFF, OFF))
             2 -> Hours(bottomColors = listOf(RED, RED, OFF, OFF))
+            3 -> Hours(bottomColors = listOf(RED, RED, RED, OFF))
             else -> defaultHours
         }
     }
