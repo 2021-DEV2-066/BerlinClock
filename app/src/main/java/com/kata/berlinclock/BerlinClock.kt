@@ -21,8 +21,11 @@ class BerlinClock {
         )
     }
 
-    private fun getSeconds(sec: Int): LampColor =
-        if (sec.isEven()) YELLOW else OFF
+    private fun getHours(hours: Int): Hours = when {
+        hours.lessThanFive() -> getValueForHoursLessThanFive(hours)
+        hours.greaterThanOrEqualsFive() -> getValueForHoursGreaterThanFive(hours)
+        else -> defaultHours
+    }
 
     private fun getMinutes(minutes: Int): Minutes = when {
         minutes.lessThanFive() -> getValueForMinutesLessThanFive(minutes)
@@ -30,11 +33,33 @@ class BerlinClock {
         else -> defaultMinutes
     }
 
-    private fun getHours(hours: Int): Hours = when {
-        hours.lessThanFive() -> getValueForHoursLessThanFive(hours)
-        hours.greaterThanOrEqualsFive() -> getValueForHoursGreaterThanFive(hours)
-        else -> defaultHours
+    private fun getSeconds(sec: Int): LampColor =
+        if (sec.isEven()) YELLOW else OFF
+
+    private fun getValueForHoursLessThanFive(hours: Int): Hours =
+        Hours(bottomColors = getHoursLampColors(hours, Hours.default()))
+
+    private fun getValueForHoursGreaterThanFive(hours: Int): Hours {
+        val numberOfLightsOnTopToBeTurnedON = hours / 5
+        val numberOfLightsOnBottomToBeTurnedON = hours % 5
+
+        return Hours(
+            getHoursLampColors(numberOfLightsOnTopToBeTurnedON, Hours.default()),
+            getHoursLampColors(numberOfLightsOnBottomToBeTurnedON, Hours.default())
+        )
     }
+
+    private fun getHoursLampColors(
+        hours: Int,
+        lampColor: MutableList<LampColor>
+    ): MutableList<LampColor> {
+        (1..hours).forEach { i ->
+            lampColor[i - 1] = RED
+        }
+        return lampColor
+    }
+
+    private val defaultHours get() = Hours()
 
     private fun getValueForMinutesLessThanFive(minutes: Int) =
         Minutes(
@@ -54,7 +79,6 @@ class BerlinClock {
                 numberOfLightsOnBottomToBeTurnedON,
                 Minutes.defaultBottom()
             )
-
         return Minutes(topColors = minutesOfLampsOnTop, bottomColors = minutesOnBottom)
     }
 
@@ -86,31 +110,6 @@ class BerlinClock {
     private fun Int.lessThanFive() = this < FIVE
     private fun Int.isEven() = this % TWO == ZERO
     private fun Int.multipleOfThree() = this % THREE == ZERO
-
-    private fun getValueForHoursLessThanFive(hours: Int): Hours =
-        Hours(bottomColors = getHoursLampColors(hours, Hours.default()))
-
-    private fun getHoursLampColors(
-        hours: Int,
-        lampColor: MutableList<LampColor>
-    ): MutableList<LampColor> {
-        (1..hours).forEach { i ->
-            lampColor[i - 1] = RED
-        }
-        return lampColor
-    }
-
-    private val defaultHours get() = Hours()
-
-    private fun getValueForHoursGreaterThanFive(hours: Int): Hours {
-        val numberOfLightsOnTopToBeTurnedON = hours / 5
-        val numberOfLightsOnBottomToBeTurnedON = hours % 5
-
-        return Hours(
-            getHoursLampColors(numberOfLightsOnTopToBeTurnedON, Hours.default()),
-            getHoursLampColors(numberOfLightsOnBottomToBeTurnedON, Hours.default())
-        )
-    }
 
     companion object {
         const val ZERO = 0
