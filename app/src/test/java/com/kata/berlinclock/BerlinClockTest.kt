@@ -1,6 +1,7 @@
 package com.kata.berlinclock
 
 import com.google.common.truth.Truth.assertThat
+import com.kata.berlinclock.model.Minutes
 import com.kata.berlinclock.utils.LampColor.*
 import org.junit.Test
 
@@ -45,6 +46,16 @@ class BerlinClockTest {
         val result = berlinClock.getSeconds(39)
 
         val expectedResult = OFF
+        assertThat(expectedResult).isEqualTo(result)
+    }
+
+    @Test
+    fun test_0_minute() {
+        val result = berlinClock.getMinutes(0)
+
+        val minutesOnTop = listOf(OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF)
+        val minutesOnBottom = listOf(OFF, OFF, OFF, OFF)
+        val expectedResult = Minutes(topColors = minutesOnTop, bottomColors = minutesOnBottom)
         assertThat(expectedResult).isEqualTo(result)
     }
 }
