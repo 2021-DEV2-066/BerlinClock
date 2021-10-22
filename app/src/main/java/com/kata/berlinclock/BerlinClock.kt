@@ -30,6 +30,12 @@ class BerlinClock {
         else -> defaultMinutes
     }
 
+    private fun getHours(hours: Int): Hours = when {
+        hours.lessThanFive() -> getValueForHoursLessThanFive(hours)
+        hours.greaterThanOrEqualsFive() -> getValueForHoursGreaterThanFive(hours)
+        else -> defaultHours
+    }
+
     private fun getValueForMinutesLessThanFive(minutes: Int) =
         Minutes(
             bottomColors = getMinutesOnBottomLampColors(
@@ -80,12 +86,6 @@ class BerlinClock {
     private fun Int.lessThanFive() = this < FIVE
     private fun Int.isEven() = this % TWO == ZERO
     private fun Int.multipleOfThree() = this % THREE == ZERO
-
-    fun getHours(hours: Int): Hours = when {
-        hours.lessThanFive() -> getValueForHoursLessThanFive(hours)
-        hours.greaterThanOrEqualsFive() -> getValueForHoursGreaterThanFive(hours)
-        else -> defaultHours
-    }
 
     private fun getValueForHoursLessThanFive(hours: Int): Hours =
         Hours(bottomColors = getHoursLampColors(hours, Hours.default()))
