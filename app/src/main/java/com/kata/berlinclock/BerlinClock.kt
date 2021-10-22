@@ -72,6 +72,7 @@ class BerlinClock {
             1 -> Hours(bottomColors = listOf(RED, OFF, OFF, OFF))
             2 -> Hours(bottomColors = listOf(RED, RED, OFF, OFF))
             3 -> Hours(bottomColors = listOf(RED, RED, RED, OFF))
+            4 -> Hours(bottomColors = listOf(RED, RED, RED, RED))
             else -> defaultHours
         }
     }
