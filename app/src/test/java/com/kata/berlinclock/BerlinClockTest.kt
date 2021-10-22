@@ -58,4 +58,14 @@ class BerlinClockTest {
         val expectedResult = Minutes(topColors = minutesOnTop, bottomColors = minutesOnBottom)
         assertThat(expectedResult).isEqualTo(result)
     }
+
+    @Test
+    fun test_1_minute() {
+        val result = berlinClock.getMinutes(1)
+
+        val minutesOnTop = listOf(OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF)
+        val minutesOnBottom = listOf(YELLOW, OFF, OFF, OFF)
+        val expectedResult = Minutes(topColors = minutesOnTop, bottomColors = minutesOnBottom)
+        assertThat(expectedResult).isEqualTo(result)
+    }
 }

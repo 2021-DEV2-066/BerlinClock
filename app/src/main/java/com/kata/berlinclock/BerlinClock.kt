@@ -10,6 +10,9 @@ class BerlinClock {
         if (sec % 2 == 0) YELLOW else OFF
 
     fun getMinutes(minutes: Int): Minutes {
+        if (minutes == 1) {
+            return Minutes(bottomColors = listOf(YELLOW, OFF, OFF, OFF))
+        }
         return Minutes()
     }
 }
