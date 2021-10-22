@@ -1,5 +1,5 @@
 package com.kata.berlinclock.utils
 
 enum class LampColor {
-    OFF, YELLOW
+    OFF, YELLOW, RED
 }

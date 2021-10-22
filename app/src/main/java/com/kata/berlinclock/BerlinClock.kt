@@ -40,7 +40,11 @@ class BerlinClock {
     private fun getMinutesOfLampsOnTop(numberOfLightsOnTopToBeTurnedON: Int): List<LampColor> {
         val minutesOfLampsOnTop = Minutes.defaultTop()
         (1..numberOfLightsOnTopToBeTurnedON).forEach { i ->
-            minutesOfLampsOnTop[i - 1] = YELLOW
+            if (i.multipleOfThree()) {
+                minutesOfLampsOnTop[i - 1] = RED
+            } else {
+                minutesOfLampsOnTop[i - 1] = YELLOW
+            }
         }
         return minutesOfLampsOnTop
     }
@@ -60,4 +64,6 @@ class BerlinClock {
     private fun Int.greaterThanFive() = this >= 5
     private fun Int.lessThanFive() = this < 5
     private fun Int.isEven() = this % 2 == 0
+    private fun Int.multipleOfThree() = this % 3 == 0
+
 }
