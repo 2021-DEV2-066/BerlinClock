@@ -1,5 +1,6 @@
 package com.kata.berlinclock
 
+import com.kata.berlinclock.model.BerlinClockData
 import com.kata.berlinclock.model.Hours
 import com.kata.berlinclock.model.Minutes
 import com.kata.berlinclock.utils.LampColor
@@ -98,13 +99,16 @@ class BerlinClock {
         )
     }
 
-    fun getBerlinClock(time: String): List<Any> {
+    fun getBerlinClock(time: String): BerlinClockData {
         val timeComponents = time.split(":")
         val hours = getHours(timeComponents[0].toInt())
         val minutes = getMinutes(timeComponents[1].toInt())
         val seconds = getSeconds(timeComponents[2].toInt())
 
-        return listOf(seconds, minutes, hours)
+        return BerlinClockData(
+            secondsOnLamp = seconds,
+            minutesOnLamps = minutes,
+            hoursOnLamps = hours
+        )
     }
-
 }

@@ -1,6 +1,7 @@
 package com.kata.berlinclock
 
 import com.google.common.truth.Truth.assertThat
+import com.kata.berlinclock.model.BerlinClockData
 import com.kata.berlinclock.model.Hours
 import com.kata.berlinclock.model.Minutes
 import com.kata.berlinclock.utils.LampColor.*
@@ -315,9 +316,10 @@ class BerlinClockTest {
         val hoursOnBottom = listOf(RED, OFF, OFF, OFF)
         val minutesOnTop = listOf(YELLOW, YELLOW, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF)
         val minutesOnBottom = listOf(OFF, OFF, OFF, OFF)
-        val expectedResult = listOf(
-            YELLOW, Minutes(minutesOnTop, minutesOnBottom),
-            Hours(hoursOnTop, hoursOnBottom)
+        val expectedResult = BerlinClockData(
+            secondsOnLamp = YELLOW,
+            minutesOnLamps = Minutes(minutesOnTop, minutesOnBottom),
+            hoursOnLamps = Hours(hoursOnTop, hoursOnBottom)
         )
         assertThat(expectedResult).isEqualTo(result)
     }
