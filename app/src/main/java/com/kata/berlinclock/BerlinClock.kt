@@ -70,6 +70,8 @@ class BerlinClock {
     fun getHours(hours: Int): Hours {
         if (hours == 1)
             return Hours(bottomColors = listOf(RED, OFF, OFF, OFF))
+        if (hours == 2)
+            return Hours(bottomColors = listOf(RED, RED, OFF, OFF))
         return Hours()
     }
 }
