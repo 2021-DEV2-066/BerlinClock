@@ -68,6 +68,8 @@ class BerlinClock {
     private fun Int.multipleOfThree() = this % 3 == 0
 
     fun getHours(hours: Int): Hours {
+        if (hours == 1)
+            return Hours(bottomColors = listOf(RED, OFF, OFF, OFF))
         return Hours()
     }
 }
