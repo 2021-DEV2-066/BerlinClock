@@ -12,7 +12,7 @@ class BerlinClock {
 
     fun getMinutes(minutes: Int): Minutes = when {
         minutes.lessThanFive() -> getValueForMinutesLessThanFive(minutes)
-        minutes.greaterThanFive() -> getValueForMinutesGreaterThanFive(minutes)
+        minutes.greaterThanOrEqualsFive() -> getValueForMinutesGreaterThanFive(minutes)
         else -> defaultMinutes
     }
 
@@ -62,14 +62,14 @@ class BerlinClock {
 
     private val defaultMinutes get() = Minutes()
 
-    private fun Int.greaterThanFive() = this >= 5
+    private fun Int.greaterThanOrEqualsFive() = this >= 5
     private fun Int.lessThanFive() = this < 5
     private fun Int.isEven() = this % 2 == 0
     private fun Int.multipleOfThree() = this % 3 == 0
 
     fun getHours(hours: Int): Hours = when {
         hours.lessThanFive() -> getValueForHoursLessThanFive(hours)
-        hours.greaterThanFive() -> getValueForHoursGreaterThanFive(hours)
+        hours.greaterThanOrEqualsFive() -> getValueForHoursGreaterThanFive(hours)
         else -> defaultHours
     }
 
