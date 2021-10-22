@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.kata.berlinclock.BerlinClock.Companion.FIVE
 import com.kata.berlinclock.BerlinClock.Companion.TWO
+import com.kata.berlinclock.BerlinClockActivity.Companion.SPAN_COUNT_ELEVEN
 import com.kata.berlinclock.R
 import com.kata.berlinclock.databinding.BerlinClockItemLayoutBinding
 import com.kata.berlinclock.utils.LampColor
@@ -36,7 +37,7 @@ class FiveMinutesAdapter :
         minutesOnTopLamps.isNotEmpty() && (position == TWO ||
                 position == FIVE || position == EIGHT)
 
-    override fun getItemCount() = 11
+    override fun getItemCount() = SPAN_COUNT_ELEVEN
 
     fun setMinutesValue(minutesOnTopValue: List<LampColor>) {
         minutesOnTopLamps = minutesOnTopValue

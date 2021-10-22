@@ -3,6 +3,7 @@ package com.kata.berlinclock.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.kata.berlinclock.BerlinClockActivity.Companion.SPAN_COUNT_FOUR
 import com.kata.berlinclock.databinding.BerlinClockItemLayoutBinding
 import com.kata.berlinclock.utils.LampColor
 
@@ -21,7 +22,7 @@ class OneMinuteAdapter :
         holder.bind(minutesOnBottomLamps[position])
     }
 
-    override fun getItemCount() = 4
+    override fun getItemCount() = SPAN_COUNT_FOUR
 
     fun setMinutesValue(minutesOnBottomValue: List<LampColor>) {
         minutesOnBottomLamps = minutesOnBottomValue
