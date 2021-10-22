@@ -39,7 +39,7 @@ Author: 2021-DEV2-066
   clone the master branch
   
 ```bash
- git clone https://github.com/dinessh77dev/BerlinClock4.git
+ git clone https://github.com/2021-DEV2-066/BerlinClock.git
 ```
 
 # Running App
