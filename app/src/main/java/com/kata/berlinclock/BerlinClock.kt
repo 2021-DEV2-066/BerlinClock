@@ -26,8 +26,8 @@ class BerlinClock {
         )
 
     private fun getValueForMinutesGreaterThanFive(minutes: Int): Minutes {
-        val numberOfLightsOnTopToBeTurnedON = minutes / 5
-        val numberOfLightsOnBottomToBeTurnedON = minutes % 5
+        val numberOfLightsOnTopToBeTurnedON = minutes / FIVE
+        val numberOfLightsOnBottomToBeTurnedON = minutes % FIVE
 
         val minutesOfLampsOnTop = getMinutesOfLampsOnTop(numberOfLightsOnTopToBeTurnedON)
         val minutesOnBottom =
@@ -41,11 +41,11 @@ class BerlinClock {
 
     private fun getMinutesOfLampsOnTop(numberOfLightsOnTopToBeTurnedON: Int): List<LampColor> {
         val minutesOfLampsOnTop = Minutes.defaultTop()
-        (1..numberOfLightsOnTopToBeTurnedON).forEach { i ->
+        (ONE..numberOfLightsOnTopToBeTurnedON).forEach { i ->
             if (i.multipleOfThree()) {
-                minutesOfLampsOnTop[i - 1] = RED
+                minutesOfLampsOnTop[i - ONE] = RED
             } else {
-                minutesOfLampsOnTop[i - 1] = YELLOW
+                minutesOfLampsOnTop[i - ONE] = YELLOW
             }
         }
         return minutesOfLampsOnTop
@@ -55,18 +55,18 @@ class BerlinClock {
         minutes: Int,
         lampColor: MutableList<LampColor>
     ): List<LampColor> {
-        (1..minutes).forEach { i ->
-            lampColor[i - 1] = YELLOW
+        (ONE..minutes).forEach { i ->
+            lampColor[i - ONE] = YELLOW
         }
         return lampColor
     }
 
     private val defaultMinutes get() = Minutes()
 
-    private fun Int.greaterThanOrEqualsFive() = this >= 5
-    private fun Int.lessThanFive() = this < 5
-    private fun Int.isEven() = this % 2 == 0
-    private fun Int.multipleOfThree() = this % 3 == 0
+    private fun Int.greaterThanOrEqualsFive() = this >= FIVE
+    private fun Int.lessThanFive() = this < FIVE
+    private fun Int.isEven() = this % TWO == ZERO
+    private fun Int.multipleOfThree() = this % THREE == ZERO
 
     fun getHours(hours: Int): Hours = when {
         hours.lessThanFive() -> getValueForHoursLessThanFive(hours)
@@ -101,14 +101,22 @@ class BerlinClock {
 
     fun getBerlinClock(time: String): BerlinClockData {
         val timeComponents = time.split(":")
-        val hours = getHours(timeComponents[0].toInt())
-        val minutes = getMinutes(timeComponents[1].toInt())
-        val seconds = getSeconds(timeComponents[2].toInt())
+        val hours = getHours(timeComponents[ZERO].toInt())
+        val minutes = getMinutes(timeComponents[ONE].toInt())
+        val seconds = getSeconds(timeComponents[TWO].toInt())
 
         return BerlinClockData(
             secondsOnLamp = seconds,
             minutesOnLamps = minutes,
             hoursOnLamps = hours
         )
+    }
+
+    companion object {
+        const val ZERO = 0
+        const val ONE = 1
+        const val TWO = 2
+        const val THREE = 3
+        const val FIVE = 5
     }
 }
