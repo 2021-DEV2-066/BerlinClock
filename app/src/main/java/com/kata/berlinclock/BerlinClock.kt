@@ -7,7 +7,7 @@ import com.kata.berlinclock.utils.LampColor.*
 class BerlinClock {
 
     fun getSeconds(sec: Int): LampColor =
-        if (sec % 2 == 0) YELLOW else OFF
+        if (sec.isEven()) YELLOW else OFF
 
     fun getMinutes(minutes: Int): Minutes = when {
         minutes.lessThanFive() -> getValueForMinutesLessThanFive(minutes)
@@ -59,4 +59,5 @@ class BerlinClock {
 
     private fun Int.greaterThanFive() = this >= 5
     private fun Int.lessThanFive() = this < 5
+    private fun Int.isEven() = this % 2 == 0
 }
