@@ -5,9 +5,6 @@ import com.kata.berlinclock.utils.LampColor.*
 
 class BerlinClock {
 
-    fun getSeconds(sec: Int): LampColor {
-        if (sec == 1)
-            return OFF
-        return YELLOW
-    }
+    fun getSeconds(sec: Int): LampColor =
+        if (sec % 2 == 0) YELLOW else OFF
 }
