@@ -11,12 +11,7 @@ class BerlinClock {
 
     fun getMinutes(minutes: Int): Minutes {
         return when (minutes) {
-            in 1..4 -> Minutes(
-                bottomColors = getMinutesOnBottomLampColors(
-                    minutes,
-                    Minutes.defaultBottom()
-                )
-            )
+            in 1..4 -> getValueForMinutesLessThanFive(minutes)
             5 -> {
                 val minutesOnTop = listOf(YELLOW, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF)
                 Minutes(topColors = minutesOnTop, bottomColors = Minutes.defaultBottom())
@@ -29,6 +24,14 @@ class BerlinClock {
             else -> defaultMinutes
         }
     }
+
+    private fun getValueForMinutesLessThanFive(minutes: Int) =
+        Minutes(
+            bottomColors = getMinutesOnBottomLampColors(
+                minutes,
+                Minutes.defaultBottom()
+            )
+        )
 
     private fun getMinutesOnBottomLampColors(
         minutes: Int,
