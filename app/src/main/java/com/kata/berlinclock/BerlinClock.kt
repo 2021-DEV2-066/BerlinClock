@@ -8,7 +8,20 @@ import com.kata.berlinclock.utils.LampColor.*
 
 class BerlinClock {
 
-    fun getSeconds(sec: Int): LampColor =
+    fun getBerlinClock(time: String): BerlinClockData {
+        val timeComponents = time.split(":")
+        val hours = getHours(timeComponents[ZERO].toInt())
+        val minutes = getMinutes(timeComponents[ONE].toInt())
+        val seconds = getSeconds(timeComponents[TWO].toInt())
+
+        return BerlinClockData(
+            secondsOnLamp = seconds,
+            minutesOnLamps = minutes,
+            hoursOnLamps = hours
+        )
+    }
+
+    private fun getSeconds(sec: Int): LampColor =
         if (sec.isEven()) YELLOW else OFF
 
     fun getMinutes(minutes: Int): Minutes = when {
@@ -96,19 +109,6 @@ class BerlinClock {
         return Hours(
             getHoursLampColors(numberOfLightsOnTopToBeTurnedON, Hours.default()),
             getHoursLampColors(numberOfLightsOnBottomToBeTurnedON, Hours.default())
-        )
-    }
-
-    fun getBerlinClock(time: String): BerlinClockData {
-        val timeComponents = time.split(":")
-        val hours = getHours(timeComponents[ZERO].toInt())
-        val minutes = getMinutes(timeComponents[ONE].toInt())
-        val seconds = getSeconds(timeComponents[TWO].toInt())
-
-        return BerlinClockData(
-            secondsOnLamp = seconds,
-            minutesOnLamps = minutes,
-            hoursOnLamps = hours
         )
     }
 

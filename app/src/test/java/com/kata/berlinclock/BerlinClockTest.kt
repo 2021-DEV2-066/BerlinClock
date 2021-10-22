@@ -4,6 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import com.kata.berlinclock.model.BerlinClockData
 import com.kata.berlinclock.model.Hours
 import com.kata.berlinclock.model.Minutes
+import com.kata.berlinclock.utils.LampColor
 import com.kata.berlinclock.utils.LampColor.*
 import org.junit.Test
 
@@ -13,41 +14,41 @@ class BerlinClockTest {
 
     @Test
     fun test_0_second_should_return_yellow_lamp_color() {
-        val result = berlinClock.getSeconds(0)
+        val result = berlinClock.getBerlinClock("00:00:00")
 
-        val expectedResult = YELLOW
+        val expectedResult = berlinClockForSeconds(YELLOW)
         assertThat(expectedResult).isEqualTo(result)
     }
 
     @Test
     fun test_1_second_should_return_off_lamp_color() {
-        val result = berlinClock.getSeconds(1)
+        val result = berlinClock.getBerlinClock("00:00:01")
 
-        val expectedResult = OFF
+        val expectedResult = berlinClockForSeconds(OFF)
         assertThat(expectedResult).isEqualTo(result)
     }
 
     @Test
     fun test_2_seconds_should_return_yellow_lamp_color() {
-        val result = berlinClock.getSeconds(2)
+        val result = berlinClock.getBerlinClock("00:00:02")
 
-        val expectedResult = YELLOW
+        val expectedResult = berlinClockForSeconds(YELLOW)
         assertThat(expectedResult).isEqualTo(result)
     }
 
     @Test
     fun test_random_even_seconds_should_return_yellow() {
-        val result = berlinClock.getSeconds(36)
+        val result = berlinClock.getBerlinClock("00:00:36")
 
-        val expectedResult = YELLOW
+        val expectedResult = berlinClockForSeconds(YELLOW)
         assertThat(expectedResult).isEqualTo(result)
     }
 
     @Test
     fun test_random_odd_seconds_should_return_off() {
-        val result = berlinClock.getSeconds(39)
+        val result = berlinClock.getBerlinClock("00:00:39")
 
-        val expectedResult = OFF
+        val expectedResult = berlinClockForSeconds(OFF)
         assertThat(expectedResult).isEqualTo(result)
     }
 
@@ -373,4 +374,6 @@ class BerlinClockTest {
         assertThat(expectedResult).isEqualTo(result)
     }
 
+    private fun berlinClockForSeconds(seconds: LampColor) =
+        BerlinClockData(seconds, Minutes(), Hours())
 }
