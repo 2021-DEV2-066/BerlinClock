@@ -97,4 +97,14 @@ class BerlinClock {
             getHoursLampColors(numberOfLightsOnBottomToBeTurnedON, Hours.default())
         )
     }
+
+    fun getBerlinClock(time: String): List<Any> {
+        val timeComponents = time.split(":")
+        val hours = getHours(timeComponents[0].toInt())
+        val minutes = getMinutes(timeComponents[1].toInt())
+        val seconds = getSeconds(timeComponents[2].toInt())
+
+        return listOf(seconds, minutes, hours)
+    }
+
 }
