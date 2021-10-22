@@ -67,14 +67,22 @@ class BerlinClock {
     private fun Int.isEven() = this % 2 == 0
     private fun Int.multipleOfThree() = this % 3 == 0
 
-    fun getHours(hours: Int): Hours {
-        return when (hours) {
-            1 -> Hours(bottomColors = listOf(RED, OFF, OFF, OFF))
-            2 -> Hours(bottomColors = listOf(RED, RED, OFF, OFF))
-            3 -> Hours(bottomColors = listOf(RED, RED, RED, OFF))
-            4 -> Hours(bottomColors = listOf(RED, RED, RED, RED))
-            else -> defaultHours
+    fun getHours(hours: Int): Hours = when {
+        hours.lessThanFive() -> getValueForHoursLessThanFive(hours)
+        else -> defaultHours
+    }
+
+    private fun getValueForHoursLessThanFive(hours: Int): Hours =
+        Hours(bottomColors = getHoursLampColors(hours, Hours.default()))
+
+    private fun getHoursLampColors(
+        hours: Int,
+        lampColor: MutableList<LampColor>
+    ): MutableList<LampColor> {
+        (1..hours).forEach { i ->
+            lampColor[i - 1] = RED
         }
+        return lampColor
     }
 
     private val defaultHours get() = Hours()
