@@ -1,6 +1,7 @@
 package com.kata.berlinclock
 
 import com.google.common.truth.Truth.assertThat
+import com.kata.berlinclock.model.Hours
 import com.kata.berlinclock.model.Minutes
 import com.kata.berlinclock.utils.LampColor.*
 import org.junit.Test
@@ -193,7 +194,8 @@ class BerlinClockTest {
     fun test_45_minutes() {
         val result = berlinClock.getMinutes(45)
 
-        val minutesOnTop = listOf(YELLOW, YELLOW, RED, YELLOW, YELLOW, RED, YELLOW, YELLOW, RED, OFF, OFF)
+        val minutesOnTop =
+            listOf(YELLOW, YELLOW, RED, YELLOW, YELLOW, RED, YELLOW, YELLOW, RED, OFF, OFF)
         val minutesOnBottom = listOf(OFF, OFF, OFF, OFF)
         val expectedResult = Minutes(topColors = minutesOnTop, bottomColors = minutesOnBottom)
         assertThat(expectedResult).isEqualTo(result)
@@ -203,9 +205,19 @@ class BerlinClockTest {
     fun test_59_minutes() {
         val result = berlinClock.getMinutes(59)
 
-        val minutesOnTop = listOf(YELLOW, YELLOW, RED, YELLOW, YELLOW, RED, YELLOW, YELLOW, RED, YELLOW, YELLOW)
+        val minutesOnTop =
+            listOf(YELLOW, YELLOW, RED, YELLOW, YELLOW, RED, YELLOW, YELLOW, RED, YELLOW, YELLOW)
         val minutesOnBottom = listOf(YELLOW, YELLOW, YELLOW, YELLOW)
         val expectedResult = Minutes(topColors = minutesOnTop, bottomColors = minutesOnBottom)
+        assertThat(expectedResult).isEqualTo(result)
+    }
+
+    @Test
+    fun test_0_hour() {
+        val result = berlinClock.getHours(0)
+
+        val hoursOnBottom = listOf(OFF, OFF, OFF, OFF)
+        val expectedResult = Hours(bottomColors = hoursOnBottom)
         assertThat(expectedResult).isEqualTo(result)
     }
 }

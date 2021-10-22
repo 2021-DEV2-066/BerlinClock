@@ -1,5 +1,6 @@
 package com.kata.berlinclock
 
+import com.kata.berlinclock.model.Hours
 import com.kata.berlinclock.model.Minutes
 import com.kata.berlinclock.utils.LampColor
 import com.kata.berlinclock.utils.LampColor.*
@@ -66,4 +67,7 @@ class BerlinClock {
     private fun Int.isEven() = this % 2 == 0
     private fun Int.multipleOfThree() = this % 3 == 0
 
+    fun getHours(hours: Int): Hours {
+        return Hours()
+    }
 }
