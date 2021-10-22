@@ -24,7 +24,7 @@ class BerlinClock {
     private fun getSeconds(sec: Int): LampColor =
         if (sec.isEven()) YELLOW else OFF
 
-    fun getMinutes(minutes: Int): Minutes = when {
+    private fun getMinutes(minutes: Int): Minutes = when {
         minutes.lessThanFive() -> getValueForMinutesLessThanFive(minutes)
         minutes.greaterThanOrEqualsFive() -> getValueForMinutesGreaterThanFive(minutes)
         else -> defaultMinutes
