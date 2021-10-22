@@ -15,4 +15,12 @@ class BerlinClockTest {
         val expectedResult = YELLOW
         assertThat(expectedResult).isEqualTo(result)
     }
+
+    @Test
+    fun test_1_second_should_return_off_lamp_color() {
+        val result = berlinClock.getSeconds(1)
+
+        val expectedResult = OFF
+        assertThat(expectedResult).isEqualTo(result)
+    }
 }
