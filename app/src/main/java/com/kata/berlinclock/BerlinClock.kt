@@ -68,10 +68,12 @@ class BerlinClock {
     private fun Int.multipleOfThree() = this % 3 == 0
 
     fun getHours(hours: Int): Hours {
-        if (hours == 1)
-            return Hours(bottomColors = listOf(RED, OFF, OFF, OFF))
-        if (hours == 2)
-            return Hours(bottomColors = listOf(RED, RED, OFF, OFF))
-        return Hours()
+        return when (hours) {
+            1 -> Hours(bottomColors = listOf(RED, OFF, OFF, OFF))
+            2 -> Hours(bottomColors = listOf(RED, RED, OFF, OFF))
+            else -> defaultHours
+        }
     }
+
+    private val defaultHours get() = Hours()
 }
