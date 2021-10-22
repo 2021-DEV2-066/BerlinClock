@@ -13,6 +13,7 @@ class BerlinClock {
         return when (minutes) {
             1 -> Minutes(bottomColors = listOf(YELLOW, OFF, OFF, OFF))
             2 -> Minutes(bottomColors = listOf(YELLOW, YELLOW, OFF, OFF))
+            3 -> Minutes(bottomColors = listOf(YELLOW, YELLOW, YELLOW, OFF))
             else -> defaultMinutes
         }
     }
