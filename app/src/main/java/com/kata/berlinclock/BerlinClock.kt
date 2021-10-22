@@ -9,20 +9,10 @@ class BerlinClock {
     fun getSeconds(sec: Int): LampColor =
         if (sec % 2 == 0) YELLOW else OFF
 
-    fun getMinutes(minutes: Int): Minutes {
-        return when (minutes) {
-            in 1..4 -> getValueForMinutesLessThanFive(minutes)
-            5 -> {
-                val minutesOnTop = listOf(YELLOW, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF)
-                Minutes(topColors = minutesOnTop, bottomColors = Minutes.defaultBottom())
-            }
-            6 -> {
-                val minutesOnTop = listOf(YELLOW, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF, OFF)
-                val minutesOnBottom = listOf(YELLOW, OFF, OFF, OFF)
-                Minutes(topColors = minutesOnTop, bottomColors = minutesOnBottom)
-            }
-            else -> defaultMinutes
-        }
+    fun getMinutes(minutes: Int): Minutes = when {
+        minutes.lessThanFive() -> getValueForMinutesLessThanFive(minutes)
+        minutes.greaterThanFive() -> getValueForMinutesGreaterThanFive(minutes)
+        else -> defaultMinutes
     }
 
     private fun getValueForMinutesLessThanFive(minutes: Int) =
@@ -32,6 +22,28 @@ class BerlinClock {
                 Minutes.defaultBottom()
             )
         )
+
+    private fun getValueForMinutesGreaterThanFive(minutes: Int): Minutes {
+        val numberOfLightsOnTopToBeTurnedON = minutes / 5
+        val numberOfLightsOnBottomToBeTurnedON = minutes % 5
+
+        val minutesOfLampsOnTop = getMinutesOfLampsOnTop(numberOfLightsOnTopToBeTurnedON)
+        val minutesOnBottom =
+            getMinutesOnBottomLampColors(
+                numberOfLightsOnBottomToBeTurnedON,
+                Minutes.defaultBottom()
+            )
+
+        return Minutes(topColors = minutesOfLampsOnTop, bottomColors = minutesOnBottom)
+    }
+
+    private fun getMinutesOfLampsOnTop(numberOfLightsOnTopToBeTurnedON: Int): List<LampColor> {
+        val minutesOfLampsOnTop = Minutes.defaultTop()
+        (1..numberOfLightsOnTopToBeTurnedON).forEach { i ->
+            minutesOfLampsOnTop[i - 1] = YELLOW
+        }
+        return minutesOfLampsOnTop
+    }
 
     private fun getMinutesOnBottomLampColors(
         minutes: Int,
@@ -44,4 +56,7 @@ class BerlinClock {
     }
 
     private val defaultMinutes get() = Minutes()
+
+    private fun Int.greaterThanFive() = this >= 5
+    private fun Int.lessThanFive() = this < 5
 }
