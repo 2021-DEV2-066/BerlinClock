@@ -5,6 +5,8 @@ Kata: Berlin Clock
 
 Author: 2021-DEV2-066
 
+![berlinclockgif](https://user-images.githubusercontent.com/92963734/138420195-5a6f2d08-3a7a-41b5-8001-89baf8ab43b3.gif)
+
 # Rules & Requirements:
  The rules are described below :
 
