@@ -117,7 +117,7 @@ class BerlinClockActivityTest : KoinTest {
         )
     }
 
-    private fun hasItemAtPosition(matcher: Matcher<View?>, position: Int): Matcher<View?>? {
+    private fun hasItemAtPosition(matcher: Matcher<View?>, position: Int): Matcher<View?> {
         return object : BoundedMatcher<View?, RecyclerView>(RecyclerView::class.java) {
             override fun describeTo(description: Description) {
                 description.appendText("has item at position $position: ")
