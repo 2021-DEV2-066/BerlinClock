@@ -39,4 +39,12 @@ class BerlinClockTest {
         val expectedResult = YELLOW
         assertThat(expectedResult).isEqualTo(result)
     }
+
+    @Test
+    fun test_random_odd_seconds_should_return_off() {
+        val result = berlinClock.getSeconds(39)
+
+        val expectedResult = OFF
+        assertThat(expectedResult).isEqualTo(result)
+    }
 }
