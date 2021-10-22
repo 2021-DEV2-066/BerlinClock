@@ -16,8 +16,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class BerlinClockActivity : AppCompatActivity() {
-    private var _binding: ActivityBerlinClockBinding? = null
-    private val binding get() = _binding!!
+
+    private lateinit var binding: ActivityBerlinClockBinding
 
     private val viewModel: BerlinClockViewModel by viewModel()
 
@@ -29,7 +29,7 @@ class BerlinClockActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityBerlinClockBinding.inflate(layoutInflater)
+        binding = ActivityBerlinClockBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setRecyclerView()
         observeViewModel()
@@ -79,11 +79,6 @@ class BerlinClockActivity : AppCompatActivity() {
 
     private fun updateSecondsUI(secondsResult: LampColor) {
         binding.secondsLayout.isEnabled = secondsResult != OFF
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     companion object {
