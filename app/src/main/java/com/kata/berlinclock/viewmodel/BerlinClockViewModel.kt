@@ -14,4 +14,9 @@ class BerlinClockViewModel(private val berlinClock: BerlinClock) : ViewModel() {
     fun updateBerlinClockInitialState() {
         _berlinClockTime.postValue(BerlinClockData.initial())
     }
+
+    fun updateBerlinClock(time: String) {
+        val result = berlinClock.getBerlinClock(time)
+        _berlinClockTime.postValue(result)
+    }
 }
